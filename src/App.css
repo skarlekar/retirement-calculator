@@ -1,5 +1,82 @@
-/* CSS for Retirement Calculator */
+/* File: src/App.css */
 
+/* Apply a global font and background color */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container styles for the main content */
+.MuiContainer-root {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+h2, h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+/* Form spacing */
+.MuiFormControl-root {
+  margin-bottom: 15px;
+}
+
+/* Button styles */
+.MuiButton-containedPrimary {
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+  text-transform: none;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.MuiButton-containedPrimary:hover {
+  background-color: #125ca3;
+}
+
+/* Table styles */
+.MuiTableContainer-root {
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.MuiTableHead-root {
+  background-color: #1976d2;
+}
+
+.MuiTableCell-head {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.MuiTableCell-body {
+  text-align: center;
+}
+
+.MuiTableRow-root:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Box styling for form and results spacing */
+.MuiBox-root {
+  margin-bottom: 20px;
 }

@@ -1,5 +1,6 @@
 // File: src/App.js
 import React, { useState } from 'react';
+import { Container, Typography, Box } from '@mui/material';
 import Form from './components/Form';
 import Results from './components/Results';
 import { calculateResults } from './utils/Calculations';
@@ -19,13 +20,25 @@ const App = () => {
   const formatCurrency = (value) => `$${value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
 
   return (
-    <div>
-      <h1>Retirement Calculator</h1>
-      <Form onSubmit={handleFormSubmit} />
-      {aar !== 0 && <h2>Amount at Retirement (AAR): {formatCurrency(aar)}</h2>}
-      {yearsToRetireComfortably !== 0 && <h3>You can retire comfortably for {yearsToRetireComfortably} years.</h3>}
-      {results.length > 0 && <Results results={results} formatCurrency={formatCurrency} />}
-    </div>
+    <Container maxWidth="md">
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Retirement Calculator
+        </Typography>
+        <Form onSubmit={handleFormSubmit} />
+        {aar !== 0 && (
+          <Typography variant="h6" component="h2" sx={{ mt: 2 }}>
+            Amount at Retirement (AAR): {formatCurrency(aar)}
+          </Typography>
+        )}
+        {yearsToRetireComfortably !== 0 && (
+          <Typography variant="h6" component="h3">
+            You can retire comfortably for {yearsToRetireComfortably} years.
+          </Typography>
+        )}
+        {results.length > 0 && <Results results={results} formatCurrency={formatCurrency} />}
+      </Box>
+    </Container>
   );
 };
 
