@@ -17,20 +17,21 @@ body {
   margin-top: 40px;
 }
 
+/* App heading styles */
+.app-heading {
+  text-align: center;
+  width: 100%;
+  background-color: #1976d2;
+  color: white;
+  padding: 20px 0;
+  margin: 0;
+  font-weight: 300;
+}
+
 /* Typography styles */
-h1, h2, h3, h4, h5, h6 {
+h2, h3 {
   color: #333;
   margin-bottom: 20px;
-}
-
-h1 {
-  font-size: 2.5rem;
-  font-weight: 500;
-}
-
-h2, h3 {
-  font-size: 1.5rem;
-  font-weight: 400;
 }
 
 /* Form spacing */

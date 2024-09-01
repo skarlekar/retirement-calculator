@@ -21,10 +21,10 @@ const App = () => {
 
   return (
     <Container maxWidth="md">
+      <Typography variant="h2" component="h1" className="app-heading" gutterBottom>
+        RETIREMENT CALCULATOR
+      </Typography>
       <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Retirement Calculator
-        </Typography>
         <Form onSubmit={handleFormSubmit} />
         {aar !== 0 && (
           <Typography variant="h6" component="h2" sx={{ mt: 2 }}>
