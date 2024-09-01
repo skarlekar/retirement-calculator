@@ -1,7 +1,7 @@
-// File: Results.js
+// File: src/components/Results.js
 import React from 'react';
 
-const Results = ({ results }) => {
+const Results = ({ results, formatCurrency }) => {
   return (
     <div>
       <h2>Retirement Forecast Results</h2>
@@ -21,12 +21,12 @@ const Results = ({ results }) => {
           {results.map((year, index) => (
             <tr key={index}>
               <td>{year.year}</td>
-              <td>${year.beginningBalance.toFixed(2)}</td>
-              <td>${year.annualGrowth.toFixed(2)}</td>
-              <td>${year.taxes.toFixed(2)}</td>
-              <td>${year.annualWithdrawal.toFixed(2)}</td>
-              <td>${year.endingBalance.toFixed(2)}</td>
-              <td>${year.incomeInHand.toFixed(2)}</td>
+              <td>{formatCurrency(year.beginningBalance)}</td>
+              <td>{formatCurrency(year.annualGrowth)}</td>
+              <td>{formatCurrency(year.taxes)}</td>
+              <td>{formatCurrency(year.annualWithdrawal)}</td>
+              <td>{formatCurrency(year.endingBalance)}</td>
+              <td>{formatCurrency(year.incomeInHand)}</td>
             </tr>
           ))}
         </tbody>
