@@ -5,6 +5,7 @@ import { TextField, Button, Grid, Box } from '@mui/material';
 const Form = ({ onSubmit }) => {
   const [formValues, setFormValues] = useState({
     initialInvestment: '',
+    amp: '',  // Moved AMP here, right after Initial Investment
     prr: '',
     wr: '',
     nyr: '',
@@ -41,6 +42,19 @@ const Form = ({ onSubmit }) => {
               placeholder="Initial Investment"
               onChange={handleChange}
               value={formValues.initialInvestment}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Additional Monthly Payment"
+              type="number"
+              step="0.01"
+              name="amp"
+              placeholder="Additional Monthly Payment"
+              onChange={handleChange}
+              value={formValues.amp}
               required
             />
           </Grid>

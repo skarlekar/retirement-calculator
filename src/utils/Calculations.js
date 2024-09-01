@@ -1,10 +1,12 @@
 // File: src/utils/Calculations.js
 
+// Future Value (FV) function
 const FV = (rate, nper, pmt, pv, type = 0) => {
   const pow = Math.pow(1 + rate, nper);
   return -((pv * pow) + (pmt * ((1 + rate * type) * (pow - 1) / rate)));
 };
 
+// Payment (PMT) function
 const PMT = (rate, nper, pv, fv = 0, type = 0) => {
   if (rate === 0) return -(pv + fv) / nper;
   const pvif = Math.pow(1 + rate, nper);
@@ -21,9 +23,11 @@ export const calculateResults = (values) => {
     federalTaxRate,
     stateTaxRate,
     rir,
-    mwa
+    mwa,
+    amp  // Include AMP in calculation
   } = values;
 
+  // Convert percentage inputs to decimals
   const PRR = parseFloat(prr) / 100;
   const WR = parseFloat(wr) / 100;
   const FTR = parseFloat(federalTaxRate) / 100;
@@ -31,8 +35,12 @@ export const calculateResults = (values) => {
   const RIR = parseFloat(rir) / 100;
   const II = parseFloat(initialInvestment);
   const MWA = parseFloat(mwa);
+  const AMP = parseFloat(amp);
 
-  const AAR = FV(PRR, nyr, 0, -II, 1);
+  // Calculate Amount at Retirement (AAR) using AMP
+  const AAR = FV(PRR, nyr, -12 * AMP, -II, 1);
+
+  // Calculate Monthly Retirement Income (MRI)
   const MRI = PMT(WR / 12, eytl * 12, -II, 0, 1);
 
   let results = [];
