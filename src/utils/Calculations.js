@@ -1,4 +1,4 @@
-// File: Calculations.js
+// File: src/utils/Calculations.js
 
 // Future Value (FV) function
 const FV = (rate, nper, pmt, pv, type = 0) => {
@@ -10,8 +10,7 @@ const FV = (rate, nper, pmt, pv, type = 0) => {
 const PMT = (rate, nper, pv, fv = 0, type = 0) => {
   if (rate === 0) return -(pv + fv) / nper;
   const pvif = Math.pow(1 + rate, nper);
-  const pmt = rate / (pvif - 1) * -(pv * pvif + fv);
-  return type === 1 ? pmt / (1 + rate) : pmt;
+  return (rate * (pv * pvif + fv)) / ((pvif - 1) * (1 + rate * type));
 };
 
 // Present Value (PV) function
@@ -41,18 +40,18 @@ export const calculateResults = (values) => {
   const FTR = parseFloat(federalTaxRate) / 100;
   const STR = parseFloat(stateTaxRate) / 100;
   const RIR = parseFloat(rir) / 100;
+  const II = parseFloat(initialInvestment);
   const MWA = parseFloat(mwa);
 
-  // Formulas
-  const AAR = FV(PRR, nyr, -MWA * 12, -initialInvestment, 1); // Amount at Retirement
-  const MRI = PMT(WR / 12, eytl * 12, -initialInvestment, 0, 1); // Monthly Retirement Income
-  const CVFMI = PV(RIR, eytl, 0, -MWA * 12, 1); // Current Value of First Future Monthly Income
-  const NESTEGG = AAR; // Retirement Annual Total at Retirement
-  const firstYearBB = NESTEGG; // First Year Beginning Balance
+  // Calculate Amount at Retirement (AAR)
+  const AAR = FV(PRR, nyr, 0, -II, 1);
+
+  // Calculate Monthly Retirement Income (MRI)
+  const MRI = PMT(WR / 12, eytl * 12, -II, 0, 1);
 
   // Calculate results for each year
   let results = [];
-  let beginningBalance = firstYearBB;
+  let beginningBalance = AAR;
 
   for (let year = 1; year <= eytl; year++) {
     const annualGrowth = FV(RIR, 1, 0, -beginningBalance) - beginningBalance;
@@ -74,5 +73,8 @@ export const calculateResults = (values) => {
     beginningBalance = endingBalance;
   }
 
-  return results;
+  return {
+    aar: AAR,
+    results
+  };
 };
