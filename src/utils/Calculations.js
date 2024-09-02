@@ -13,6 +13,8 @@ const PMT = (rate, nper, pv, fv = 0, type = 0) => {
   return (rate * (pv * pvif + fv)) / ((pvif - 1) * (1 + rate * type));
 };
 
+
+
 export const calculateResults = (values) => {
   const {
     initialInvestment,
@@ -78,4 +80,49 @@ export const calculateResults = (values) => {
     results,
     yearsToRetireComfortably
   };
+};
+
+
+export const calculateChartData = (initialInvestment, prr, wr, nyr, eytl, federalTaxRate, stateTaxRate, rir, mwa) => {
+  const data = [];
+  const maxAMP = 5000; // Define a maximum AMP value for chart purposes
+  const increment = 500; // Increment AMP by $500 for each data point
+
+  for (let amp = 0; amp <= maxAMP; amp += increment) {
+    let remainingFunds = initialInvestment;
+    let totalNeeded = 0;
+    let year = 0;
+    let canRetire = true;
+
+    while (year < eytl && canRetire) {
+      const annualGrowth = FV(rir / 100, 1, 0, -remainingFunds) - remainingFunds;
+      const taxes = (federalTaxRate / 100 + stateTaxRate / 100) * annualGrowth;
+      const annualWithdrawal = mwa * 12;
+      const endingBalance = remainingFunds + annualGrowth - taxes - annualWithdrawal - (amp * 12);
+
+      // Check if calculations result in negative or NaN values
+      if (isNaN(annualGrowth) || isNaN(taxes) || isNaN(annualWithdrawal) || isNaN(endingBalance)) {
+        canRetire = false;
+        break;
+      }
+
+      // Update funds and check if they are exhausted
+      if (endingBalance <= 0) {
+        canRetire = false;
+        break;
+      }
+
+      remainingFunds = endingBalance; // Update remaining funds for next iteration
+      totalNeeded += annualWithdrawal + taxes; // Accumulate total needed per year
+      year++;
+    }
+
+    data.push({
+      amp, // Additional monthly payment
+      yearsOfRetirement: year, // Years the funds will last
+      totalNeeded: year > 0 ? totalNeeded : 0 // Total amount needed to last the lifetime
+    });
+  }
+
+  return data;
 };
