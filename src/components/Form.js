@@ -35,11 +35,11 @@ const Form = ({ onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label="Initial Investment"
+              label="Current Savings"
               type="number"
               step="0.01"
               name="initialInvestment"
-              placeholder="Initial Investment"
+              placeholder="Current Savings for Retirement"
               onChange={handleChange}
               value={formValues.initialInvestment}
               required
@@ -99,10 +99,10 @@ const Form = ({ onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              label="Expected Years to Live After Retirement"
+              label="Expected No. of Years to Enjoy Retirement Savings"
               type="number"
               name="eytl"
-              placeholder="Expected Years to Live After Retirement"
+              placeholder="Expected No. of Years to Enjoy Retirement Savings"
               onChange={handleChange}
               value={formValues.eytl}
               required
