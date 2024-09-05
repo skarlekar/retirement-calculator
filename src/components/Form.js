@@ -5,14 +5,14 @@ import { TextField, Button, Grid, Box } from '@mui/material';
 const Form = ({ onSubmit }) => {
   const [formValues, setFormValues] = useState({
     initialInvestment: '',
-    amp: '',  // Moved AMP here, right after Initial Investment
-    prr: '',
-    wr: '',
-    nyr: '',
-    eytl: '',
-    federalTaxRate: '',
-    stateTaxRate: '',
-    rir: '',
+    amp: '',
+    prr: '5',  // Default value: 5
+    wr: '4',   // Default value: 4
+    nyr: '5',  // Default value: 5
+    eytl: '20', // Default value: 20
+    federalTaxRate: '25', // Default value: 25
+    stateTaxRate: '6',   // Default value: 6
+    rir: '3',  // Default value: 3
     mwa: ''
   });
 

@@ -3,3 +3,4 @@ build/
 .DS_Store
 .env
 setup-retirement-calculator.sh
+.vercel
